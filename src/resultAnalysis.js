@@ -7,7 +7,7 @@ const connectOpt = {
   useUnifiedTopology: true
 }
 
-// Realizamos la conexion a la db
+// DB connection
 mongoose
   .connect(mongoUri, connectOpt)
   .then(() => console.log('MongoDB connected'))
@@ -19,9 +19,9 @@ export const compareAndSaveResults = dataObj => {
       .then(newsList => {
         if (newsList == '') {
           console.log(`A new data was created:\n${JSON.stringify(dataObj)}`)
-          // Creamos un objeto modelado con la data
+          // Create a Model Object
           const newNews = new News(dataObj);
-          // Retornamos el objeto y lo almacenamos
+          // Return the objet and store it
           return newNews.save().catch(e => console.log(e));
         }
 
@@ -33,7 +33,7 @@ export const compareAndSaveResults = dataObj => {
 
         let catchDifference = false;
 
-        // Chequeamos si la cantidad de notas en la db o alguna nota es diferente a las actuales
+        // Check the news amount and check if the news are the same
         if (dbAmount !== amount) {
           catchDifference = true;
         } else {
